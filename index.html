@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人简介 | Your Name</title>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="themeBtn">🌓</button>
+    </div>
+    
+    <main class="container">
+        <!-- 头部卡片 -->
+        <div class="profile-card">
+            <img src="assets/avatar.jpg" alt="头像" class="avatar">
+            <h1 class="name" data-config="name">Your Name</h1>
+            <p class="title" data-config="title">Frontend Developer</p>
+        </div>
+
+        <!-- 详细信息 -->
+        <div class="info-grid">
+            <div class="card about">
+                <h2><i class="material-icons-round">person</i>关于我</h2>
+                <p data-config="bio"></p>
+            </div>
+            
+            <div class="card skills">
+                <h2><i class="material-icons-round">code</i>技术栈</h2>
+                <div class="radar-chart" id="radar"></div>
+            </div>
+        </div>
+
+        <!-- 联系按钮 -->
+        <div class="social-links">
+            <a href="#" class="btn github" data-config="github">
+                <i class="material-icons-round">terminal</i>
+                GitHub
+            </a>
+            <a href="#" class="btn email" data-config="email">
+                <i class="material-icons-round">mail</i>
+                联系我
+            </a>
+        </div>
+    </main>
+
+    <!-- 动态加载配置 -->
+    <script src="config.json"></script>
+    <script>
+        // 内容注入与主题切换
+        fetch('config.json')
+            .then(res => res.json())
+            .then(data => {
+                // 自动填充带data-config属性的元素
+                document.querySelectorAll('[data-config]').forEach(el => {
+                    const key = el.dataset.config;
+                    if (key in data) el.textContent = data[key];
+                });
+                
+                // 生成雷达图
+                drawRadarChart(data.skills);
+            });
+
+        // 暗黑模式切换
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
