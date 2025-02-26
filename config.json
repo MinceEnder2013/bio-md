@@ -1,0 +1,16 @@
+{
+    "name": "RenXingcheng",
+    "title": "一个业余计算机爱好者",
+    "bio": "???",
+    "skills": {
+        "python": 90,
+        "后端": 85,
+        "数据库": 80,
+        "DevOps": 75,
+        "UI设计": 70
+    },
+    "links": {
+        "github": "https://github.com/yourname",
+        "email": "yourname@domain.com"
+    }
+}
