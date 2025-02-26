@@ -1,0 +1,68 @@
+:root {
+    --primary: #2196F3;  /* Material Blue 500 */
+    --secondary: #FF4081; /* Pink A200 */
+    --bg-gradient: linear-gradient(135deg, #64B5F6 0%, #E3F2FD 100%);
+}
+
+/* 暗黑模式变量 */
+.dark-mode {
+    --primary: #90CAF9;
+    --secondary: #F48FB1;
+    --bg-gradient: linear-gradient(135deg, #0D47A1 0%, #1A237E 100%);
+}
+
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    transition: background 0.3s ease;
+}
+
+.profile-card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: -75px auto 1rem;
+    border: 4px solid var(--primary);
+    object-fit: cover;
+}
+
+.btn {
+    background: var(--primary);
+    color: white!important;
+    padding: 12px 24px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33,150,243,0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
