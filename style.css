@@ -81,3 +81,41 @@ body {
         display: none;
     }
 }
+/* 修复全局布局 */
+body {
+    overflow-x: hidden; /* 防止横向滚动 */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 修复头像定位 */
+.avatar-wrapper {
+    position: relative;
+    z-index: 1;
+    margin-top: -80px;
+    padding-bottom: 20px;
+}
+
+/* 导航栏防重叠 */
+.app-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .hero-card {
+        margin-top: 60px;
+        padding: 1rem;
+    }
+    
+    .avatar {
+        width: 120px;
+        height: 120px;
+        margin-top: -60px;
+    }
+}
