@@ -1,16 +1,32 @@
 {
-    "name": "RenXingcheng",
-    "title": "一个业余计算机爱好者",
-    "bio": "???",
-    "skills": {
-        "python": 90,
-        "后端": 85,
-        "数据库": 80,
-        "DevOps": 75,
-        "UI设计": 70
-    },
-    "links": {
-        "github": "https://github.com/yourname",
-        "email": "yourname@domain.com"
-    }
+    "name": "你的名字",
+    "bio": "全栈开发者 | 技术爱好者 | 开源贡献者",
+    "skills": [
+        {
+            "name": "前端开发",
+            "level": 95,
+            "description": "Vue/React/TypeScript"
+        },
+        {
+            "name": "后端架构",
+            "level": 88,
+            "description": "Node.js/Go/Python"
+        }
+    ],
+    "projects": [
+        {
+            "title": "在线教育平台",
+            "description": "基于微服务的在线学习系统",
+            "link": "#",
+            "image": "assets/projects/edu.jpg",
+            "tags": ["Vue3", "Gin", "MySQL"]
+        },
+        {
+            "title": "智能仪表盘",
+            "description": "实时数据可视化分析平台",
+            "link": "#",
+            "image": "assets/projects/dashboard.jpg",
+            "tags": ["React", "ECharts", "WebSocket"]
+        }
+    ]
 }
