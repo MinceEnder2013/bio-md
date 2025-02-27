@@ -182,3 +182,36 @@ p {
 .dark-mode p {
     color: rgba(255,255,255,0.8);
 }
+/* 导航栏移动适配 */
+@media (max-width: 480px) {
+    .app-bar .container {
+        padding: 0 1rem;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .hero-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .skill-card {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+}
+
+/* 防止iOS点击高光 */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 输入法适配 */
+@media (hover: none) {
+    .project-card:hover {
+        transform: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+}
