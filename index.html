@@ -92,6 +92,37 @@
                     document.getElementById('projectsContainer').appendChild(card);
                 });
             });
+        // 在fetch后添加错误处理
+fetch('config.json')
+    .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        return res.json();
+    })
+    .then(data => {
+        // 添加加载完成类
+        document.body.classList.add('loaded');
+        
+        // 安全数据绑定
+        const safeBind = (selector, key, fallback = '') => {
+            const element = document.querySelector(selector);
+            if (element) element.textContent = data[key] || fallback;
+        };
+
+        safeBind('.name', 'name', '访客');
+        safeBind('.bio', 'bio', '这个人很神秘...');
+
+        // 动态生成内容添加过渡效果
+        data.skills.forEach((skill, index) => {
+            const card = document.createElement('div');
+            card.className = 'skill-card';
+            card.style.animationDelay = `${index * 0.1}s`;
+            // ...原有生成逻辑
+        });
+    })
+    .catch(err => {
+        console.error('内容加载失败:', err);
+        document.body.innerHTML = `<div class="error">内容加载失败，请刷新重试</div>`;
+    });
     </script>
 </body>
 </html>
