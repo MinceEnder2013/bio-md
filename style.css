@@ -142,3 +142,19 @@ body:not(.loaded)::after {
 @keyframes spin {
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
+/* 按钮点击动效 */
+.btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+/* 卡片悬停 */
+.project-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
