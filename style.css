@@ -158,3 +158,27 @@ body:not(.loaded)::after {
     transform: translateY(-5px);
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
+/* 文字层级 */
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin: 0.5em 0;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-left: 4px solid var(--primary);
+    padding-left: 1rem;
+    margin: 2rem 0;
+}
+
+p {
+    line-height: 1.8;
+    color: rgba(0,0,0,0.8);
+    max-width: 65ch;
+}
+
+.dark-mode p {
+    color: rgba(255,255,255,0.8);
+}
