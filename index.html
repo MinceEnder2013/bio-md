@@ -3,72 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人简介 | Your Name</title>
-    <!-- Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <!-- 自定义样式 -->
+    <title>个人简介 | YourName</title>
+    <!-- Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0">
+    <!-- 核心样式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="theme-toggle">
-        <button id="themeBtn">🌓</button>
-    </div>
-    
+    <nav class="app-bar">
+        <div class="container">
+            <span class="logo">Portfolio</span>
+            <div class="nav-links">
+                <a href="#about">关于</a>
+                <a href="#projects">项目</a>
+                <a href="#contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
     <main class="container">
-        <!-- 头部卡片 -->
-        <div class="profile-card">
-            <img src="assets/avatar.jpg" alt="头像" class="avatar">
-            <h1 class="name" data-config="name">Your Name</h1>
-            <p class="title" data-config="title">Frontend Developer</p>
-        </div>
-
-        <!-- 详细信息 -->
-        <div class="info-grid">
-            <div class="card about">
-                <h2><i class="material-icons-round">person</i>关于我</h2>
-                <p data-config="bio"></p>
+        <!-- 个人简介卡 -->
+        <section class="hero-card">
+            <div class="avatar-wrapper">
+                <img src="assets/avatar.jpg" alt="头像" class="avatar">
             </div>
-            
-            <div class="card skills">
-                <h2><i class="material-icons-round">code</i>技术栈</h2>
-                <div class="radar-chart" id="radar"></div>
-            </div>
-        </div>
+            <h1 class="name" data-bind="name">Your Name</h1>
+            <p class="bio" data-bind="bio">正在加载简介...</p>
+        </section>
 
-        <!-- 联系按钮 -->
-        <div class="social-links">
-            <a href="#" class="btn github" data-config="github">
-                <i class="material-icons-round">terminal</i>
-                GitHub
-            </a>
-            <a href="#" class="btn email" data-config="email">
-                <i class="material-icons-round">mail</i>
-                联系我
-            </a>
-        </div>
+        <!-- 技术能力 -->
+        <section id="skills" class="section">
+            <h2><span class="material-symbols-rounded">code</span>技术栈</h2>
+            <div class="skills-grid" id="skillsContainer"></div>
+        </section>
+
+        <!-- 项目展示 -->
+        <section id="projects" class="section">
+            <h2><span class="material-symbols-rounded">dashboard</span>精选项目</h2>
+            <div class="project-grid" id="projectsContainer"></div>
+        </section>
     </main>
 
-    <!-- 动态加载配置 -->
-    <script src="config.json"></script>
+    <!-- 动态加载 -->
     <script>
-        // 内容注入与主题切换
         fetch('config.json')
             .then(res => res.json())
             .then(data => {
-                // 自动填充带data-config属性的元素
-                document.querySelectorAll('[data-config]').forEach(el => {
-                    const key = el.dataset.config;
-                    if (key in data) el.textContent = data[key];
+                // 基础信息
+                document.querySelectorAll('[data-bind]').forEach(el => {
+                    el.textContent = data[el.dataset.bind] || '';
                 });
-                
-                // 生成雷达图
-                drawRadarChart(data.skills);
-            });
 
-        // 暗黑模式切换
-        document.getElementById('themeBtn').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
+                // 生成技能卡片
+                data.skills.forEach(skill => {
+                    const card = document.createElement('div');
+                    card.className = 'skill-card';
+                    card.innerHTML = `
+                        <h3>${skill.name}</h3>
+                        <div class="skill-meter">
+                            <div class="progress" style="width: ${skill.level}%"></div>
+                        </div>
+                        <p>${skill.description}</p>
+                    `;
+                    document.getElementById('skillsContainer').appendChild(card);
+                });
+
+                // 生成项目卡片
+                data.projects.forEach(project => {
+                    const card = document.createElement('a');
+                    card.className = 'project-card';
+                    card.href = project.link;
+                    card.target = "_blank";
+                    card.innerHTML = `
+                        <div class="thumbnail" style="background-image: url('${project.image}')"></div>
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <div class="tech-tags">${project.tags.map(t => `<span>${t}</span>`).join('')}</div>
+                    `;
+                    document.getElementById('projectsContainer').appendChild(card);
+                });
+            });
     </script>
 </body>
 </html>
